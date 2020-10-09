@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"io/ioutil"
+	"os"
 )
 
 type Settings struct {
@@ -34,6 +35,10 @@ var settings Settings
 //--------------------------------------------
 
 func ReadSettings() error {
+	if _, err := os.Stat(settingsFileName); os.IsNotExist(err) {
+		return nil
+	}
+
 	b, err := ioutil.ReadFile(settingsFileName)
 	if err != nil {
 		return err
