@@ -125,7 +125,7 @@ func cmnd_Status(userId int) string {
 		if v.IsFree {
 			builder.WriteString(strconv.Itoa(i+1) + ". " + v.Name + " - свободен\n")
 		} else {
-			builder.WriteString(strconv.Itoa(i+1) + ". " + v.Name + " - занят\n")
+			builder.WriteString(strconv.Itoa(i+1) + ". " + v.Name + " - занят для " + v.Desc + "\n")
 			builder.WriteString(
 				"     @" + v.ByName + " с " + time.Unix(v.From, 0).Format(timeFormat) +
 					" до " + time.Unix(v.To, 0).Format(timeFormat) + "\n")
@@ -172,7 +172,7 @@ func cmnd_Book(command string, userId int, userName string) string {
 	tl := int64(tli)
 	tp := strings.ToLower(res[3])
 	desc := ""
-	if l == 4 {
+	if l == 5 {
 		desc = res[4]
 	}
 
