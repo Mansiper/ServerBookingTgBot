@@ -125,7 +125,11 @@ func cmnd_Status(userId int) string {
 		if v.IsFree {
 			builder.WriteString(strconv.Itoa(i+1) + ". " + v.Name + " - свободен\n")
 		} else {
-			builder.WriteString(strconv.Itoa(i+1) + ". " + v.Name + " - занят для " + v.Desc + "\n")
+			if v.Desc != "" {
+				builder.WriteString(strconv.Itoa(i+1) + ". " + v.Name + " - занят для " + v.Desc + "\n")
+			} else {
+				builder.WriteString(strconv.Itoa(i+1) + ". " + v.Name + " - занят\n")
+			}
 			builder.WriteString(
 				"     @" + v.ByName + " с " + time.Unix(v.From, 0).Format(timeFormat) +
 					" до " + time.Unix(v.To, 0).Format(timeFormat) + "\n")
